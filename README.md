@@ -1,4 +1,4 @@
-# Programming School app (Course 1)
+# Some games in Vue
 
 A test project for students
 

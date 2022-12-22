@@ -1,1 +1,0 @@
-#game{width:500px;height:200px;border:1px solid black}#character{width:20px;height:70px;position:relative;top:148px;left:10px}#block{width:20px;height:20px;background-color:#00f;position:relative;top:104px;left:480px}@keyframes block{0%{left:480px}to{left:-20px}}@keyframes jump{0%{top:126px}30%{top:80px}70%{top:80px}to{top:126px}}.animate{animation:jump .5s}

@@ -1,6 +1,6 @@
 # Some games in Vue
 
-A test project for students
+To teach Javascript and Vue
 
 ### Install the dependencies
 npm install

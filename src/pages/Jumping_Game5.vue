@@ -2,16 +2,19 @@
   <div class="q-pa-md">
     <div ref="game" id="game">
       <span ref="cactus" class="span2">
-        <q-icon id="cactus" name="img:/images/game/cactus.png" />
+        <!--
+        <q-icon id="cactus" src="images/game/cactus.png" />
+        -->
+        <q-img style="width:52px;" ref="cactus" id="cactus" src="images/game/cactus.png" />
       </span>
       <span ref="bird" class="span2">
-        <q-icon ref="bird" id="bird" name="img:/images/game/bird.png" />
+        <q-img style="width:52px;" ref="bird" id="bird" src="images/game/bird.png" />
       </span>
       <span class="span1" ref="dinosaur" id="dinosaur">
-        <q-icon size="84px" name="img:/images/game/5458640.png" />
+        <q-img style="width:84px;height:84px" size="84px" src="images/game/5458640.png" />
       </span>
       <span class="span2" ref="turtle" id="turtle">
-        <q-icon size="42px" name="img:/images/game/8696410.png" />
+        <q-img style="width:42px;height:42px" size="42px" src="images/game/8696410.png" />
       </span>
     </div>
     <q-item-label> Points: {{ counter }}</q-item-label>
@@ -20,7 +23,6 @@
       <q-btn id="start_btn" @click="start()"> Start </q-btn>
       <q-btn id="jump_btn" @click="jump()"> Jump </q-btn>
       <q-btn id="stop_btn" @click="stop()"> Stop </q-btn>
-
     </div>
   </div>
 </template>
@@ -136,7 +138,6 @@ function checkIfDead() {
       console.log('dinosaur RightEdge.value: ' + (dinosaurRightEdge.value).toString())
       console.log('dinosaur BottomAdjusted: ' + dinosaurBottomAdjusted.toString())
       console.log('dinosaur Bottom: ' + dinosaurBottom.toString())
-
       console.log('Condition 1: ' + (turtleLeft < (dinosaurRightEdge.value)).toString())
       console.log('Condition 2: ' + (turtleLeft > 0).toString())
       console.log('Condition 3: ' + (dinosaurTop >= 230).toString())
@@ -209,7 +210,6 @@ onMounted(() => {
 }
 
 #bird {
-  width: 50px;
   /* position: relative; */
   top: -40px;
   left: 120px;

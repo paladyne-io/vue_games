@@ -1,8 +1,8 @@
 {
-  "name": "Course1",
+  "name": "Vue Games",
   "version": "0.0.2",
-  "description": "A test project",
-  "productName": "Programming School app",
+  "description": "Games for learning Vue",
+  "productName": "Vue Game Teaching app",
   "author": "darren <darren@paladyne.co.jp>",
   "private": true,
   "scripts": {

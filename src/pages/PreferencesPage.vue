@@ -7,7 +7,7 @@
         <q-toggle v-model="darkModeStatus" label="Dark mode" @click="toggled" />
       </div>
       <div class="text-center full-width q-pa-md">
-        <q-btn label="Top" color="secondary" to="/"> </q-btn>
+        <q-btn label="Top" color="secondary" to="/"></q-btn>
       </div>
     </q-card>
 
@@ -24,18 +24,6 @@ export default defineComponent({
   setup() {
     const $q = useQuasar()
     const darkModeStatus = ref($q.dark.isActive)
-
-    // get status
-    // console.log('dark mode status: ' + darkModeStatus.value) // true, false
-
-    // get configured status
-    // console.log('conf. dark mode status: ' + $q.dark.mode) // "auto", true, false
-
-    // set status
-    // $q.dark.set(darkModeStatus) // or false or "auto"
-
-    // toggle
-    // $q.dark.toggle()
 
     function toggled() {
       // console.log(darkModeStatus.value)

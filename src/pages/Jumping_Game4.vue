@@ -34,8 +34,8 @@
     <b>Others:</b>
     <ul>
       <li><a href="https://vuejs.org/guide/extras/animation.html">Vue 3 animation techniques - For reference</a></li>
-      <li><a href="https://www.youtube.com/watch?v=HxUyTDkO8Pk"> Auto animate</a></li>
-      <li><a href="https://www.youtube.com/watch?v=HxUyTDkO8Pk"> Motion</a></li>
+      <li><a href="https://www.youtube.com/watch?v=HxUyTDkO8Pk">Auto animate</a></li>
+      <li><a href="https://www.youtube.com/watch?v=7HDiV-yaquQ">Motion One</a></li>
       <li><a href="https://www.codeinwp.com/blog/best-javascript-animation-libraries/">Other animation libraries</a>
       </li>
 

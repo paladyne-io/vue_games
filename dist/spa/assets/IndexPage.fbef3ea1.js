@@ -1,4 +1,4 @@
-import{Q as a}from"./QPage.1790493b.js";import{_ as t,Q as s,X as r,d as l,S as n,F as o,a2 as e}from"./index.1ac849d4.js";import"./render.2d9c3f35.js";var c="/vue_games/assets/quasar-logo-vertical.55e9c854.svg";const i={},_=e("img",{alt:"Quasar logo 22",src:c,style:{width:"200px",height:"200px"}},null,-1),g=e("pre",null,`  <template>
+import{Q as a}from"./QPage.5726f10e.js";import{_ as t,Q as s,X as r,d as l,S as n,F as o,a2 as e}from"./index.f99951da.js";import"./render.880c69db.js";var c="/vue_games/assets/quasar-logo-vertical.55e9c854.svg";const i={},_=e("img",{alt:"Quasar logo",src:c,style:{width:"200px",height:"200px"}},null,-1),g=e("pre",null,`  <template>
     <q-page class="flex flex-center">
       <img
         alt="Quasar logo"

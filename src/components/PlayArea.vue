@@ -10,6 +10,8 @@
         v-touch:release="onMouseUp()" class="vuewel" />
     </transition-group>
   </div>
+  <q-btn label="Test" color="secondary" @click="onBtnPress()"></q-btn>
+
 </template>
 
 <!--
@@ -54,6 +56,20 @@ export default {
     },
   },
   methods: {
+
+    onBtnPress() {
+      console.log('onBtnPress...')
+      // thisFnctn.findAndRemoveClusters()
+      this.$store.commit('findAndRemove')
+      /*
+      const thisFnctn = this
+      return function (mouseEvent) {
+        console.log('onBtnPress: ', mouseEvent)
+        thisFnctn.findAndRemove()
+        this.$store.commit('findAndRemove')
+      }
+      */
+    },
 
     onMouseDown() {
       const thisFnctn = this

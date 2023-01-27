@@ -11,11 +11,7 @@
     />
   </div>
   -->
-    <img
-      alt="Quasar logo 22"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    />
+    <img alt="Quasar logo" src="~assets/quasar-logo-vertical.svg" style="width: 200px; height: 200px" />
   </q-page>
 
   <pre>
@@ -28,8 +24,9 @@
       /&gt;
     &lt;/q-page&gt;
   &lt;/template&gt;
-</pre
-  >
+</pre>
 </template>
 
-<style></style>
+<style>
+
+</style>

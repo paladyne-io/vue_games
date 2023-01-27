@@ -11,133 +11,58 @@ const switchMode = true
 let selectedVewels = []
 let selectedVewelCount = 0
 
+// Array of clusters
+
 const rows = 9
 const cols = 6
 
-const rowCount = 10
-const colCount = 7
-
-function findAndRemoveClusters(state) {
-  findClusters(state)
-
-  // console.log(state.vuewels)
-
-  // const i = 1
-  // if (i === 1) return
-
-  // const someArray = [2, 2, 2, 5, 5, 5, 3, 3, 3, 3, 9, 9];
-  /*
-  console.log(aggregate(state.vuewels))
-
-  function aggregate(arr) {
-    return arr
-    // retrieve unique values
-      .reduce((acc, val) => (!acc.includes(val) && acc.concat(val)) || acc, [])
-    // use unique values to map arr values to strings
-    // if number of matches >= 3
-      .map(val => {
-        const filtered = arr.filter(v => v === val)
-        return filtered.length > 2 ? filtered.join('') : false
-      })
-    // filter non falsy values
-      .filter(val => val)
-  }
-  */
-
-  // Tabulate scores
-  let scoreAdd = 0
-  state.vuewels
-    .filter(c => c.selected)
-    .forEach((c, i) => {
-      scoreAdd += i + 1
-    })
-  state.score += scoreAdd
-
-  console.log('scoreAdd:' + scoreAdd)
-
-  // If no score no vuewels were selected
-  if (scoreAdd === 0) {
-    return
-  }
-
-  // Remove selected vuewels
-  const vuewelsAfterRemove = state.vuewels.filter(c => !c.selected)
-
-  // console.log('vuewelsAfterRemove:' + JSON.stringify(vuewelsAfterRemove))
-
-  const newVuewels = []
-  for (let column = 0; column < state.columns; column += 1) {
-    // Get the list of all the vuewels in this column
-    const vuewels = vuewelsAfterRemove.filter(c => c.column === column)
-
-    let row = 0
-    console.log('Filling in new vuewels...')
-    // Fill in new vuewels from the top
-    const fillAmount = state.rows - vuewels.length
-    for (let fillRow = 0; fillRow < fillAmount; fillRow += 1) {
-      newVuewels.push({
-        id: state.nextId,
-        row: fillRow,
-        column,
-        color: state.colors[Math.floor(Math.random() * state.colors.length)],
-        selected: false,
-      })
-      state.nextId += 1
-    }
-
-    // Add in the existing vuewels but make sure the rows are ok
-    // console.log('row: fillAmount: ' + fillAmount)
-
-    row = fillAmount
-    vuewels.forEach((vuewel) => {
-      newVuewels.push({
-        ...vuewel,
-        row,
-      })
-      row += 1
-    })
-  }
-
-  // console.log('newVuewels: ' + JSON.stringify(newVuewels))
-
-  newVuewels.sort(function (a, b) {
-    return a.row - b.row
-  })
-
-  // console.log('newVuewels: ' + JSON.stringify(newVuewels))
-  state.vuewels = newVuewels
-}
-
 // Find clusters in the level
 function findClusters(state) {
+  // Reset clusters
+  // clusters = []
+
   const level = state.vuewels
+
   const clusters = [] // { column, row, length, horizontal }
+  // let jewelCounter = 0
+
+  // console.log('findClusters - level: ' + level)
+  // console.log('findClusters - level.rows: ' + rows)
 
   // Find horizontal clusters
-  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+  for (let rowIndex = 0; rowIndex < rows + 1; rowIndex++) {
     // Start with a single tile, cluster of 1
     // console.log('findClusters - level: ' + level)
 
-    console.log('colCount: ' + colCount)
-
     let matchlength = 1
-    for (let colIndex = 0; colIndex < colCount; colIndex += 1) {
+    for (let colIndex = 0; colIndex < cols + 1; colIndex++) {
       let checkcluster = false
 
+      // console.log(jewelCounter)
+      // console.log(level[jewelCounter])
+      // console.log('findClusters - row: ' + rowIndex)
+      // console.log('findClusters - col: ' + colIndex)
+
       if (colIndex === cols) {
-        // Last tile // 0-9
+        // Last tile
         checkcluster = true
         // console.log('Last tile')
       } else {
         // Check the type of the next tile
-        console.log('colIndex: ' + colIndex)
 
-        const pos = (colCount * rowIndex) + colIndex
+        // console.log('test jewel: ' + JSON.stringify(level[jewelCounter]))
+        // console.log('compare to next jewel: ' + JSON.stringify(level[jewelCounter + 1]))
+
+        // if (level[colIndex * (rowIndex + 1)].color === level[(colIndex + 1) * rowIndex].color &&
+        //     level[(colIndex + 1) + rowIndex].color !== -1) {
+
+        // const vuewel = level[(((rows + 1) * colIndex)) + rowIndex]
+        const pos = (((cols + 1) * (rowIndex))) + colIndex
 
         const vuewel = level[pos]
         const nextVuewel = level[pos + 1]
-        console.log('vuewel pos: ' + pos)
-        console.log('vuewel: ' + JSON.stringify(vuewel))
+
+        // console.log('vuewel pos: ' + pos)
 
         /*
             rowIndex 0 colIndex 2
@@ -167,7 +92,6 @@ function findClusters(state) {
           // Same type as the previous tile, increase matchlength
           matchlength += 1
           console.log('horizontal match: ' + matchlength)
-          console.log('vuewel: ' + JSON.stringify(vuewel))
         } else {
           // Different type
           checkcluster = true
@@ -178,8 +102,17 @@ function findClusters(state) {
       if (checkcluster) {
         if (matchlength >= 3) {
           // Found a horizontal cluster
+          // const vuewel = level[jewelCounter]
+          // vuewel.selected = true
+
+          // const firstVueweColPos = (colIndex + 1) - matchlength
+          // const lastVuewelPos = (colIndex + 1) * (rowIndex + 1)
+
+          // convertColRowToPos
+          // console.log('colIndex: ' + colIndex)
           const pos = ((rowIndex * (cols + 1)) + (colIndex))
           // console.log('pos: ' + pos)
+          // level[pos].selected = true
 
           // rowIndex 2
           // colIndex 2
@@ -189,9 +122,13 @@ function findClusters(state) {
           // colIndex 2
           // 0 * (6 + 1) + 2 = 2
 
-          for (let matchedVuewelPos = pos;
-            matchedVuewelPos > (pos - matchlength);
-            matchedVuewelPos--) {
+          // console.log('firstVuewelColPos: ' + firstVueweColPos)
+          // console.log('lastVuewel: ' + JSON.stringify(level[lastVuewelPos]))
+          // console.log('lastVuematchedVuewelPoswel: ' + matchedVuewelPos]))
+
+          for (let matchedVuewelPos = pos; matchedVuewelPos > (pos - matchlength); matchedVuewelPos--) {
+            // console.log('matchedVuewelPos: ' + matchedVuewelPos)
+            // console.log('test: ' + (matchedVuewelPos - matchlength))
             if (matchedVuewelPos < 0 || matchedVuewelPos > level.length) {
               console.log('Somethings wrong! : ' + matchedVuewelPos)
               return
@@ -208,6 +145,7 @@ function findClusters(state) {
         }
         matchlength = 1
       }
+      // jewelCounter++
     }
   }
 
@@ -217,14 +155,24 @@ function findClusters(state) {
     let matchlength = 1
     for (let rowIndex = 0; rowIndex < rows + 1; rowIndex++) {
       let checkcluster = false
+
+      // console.log('Checking column : ' + colIndex)
+      // console.log('Checking row : ' + rowIndex)
+      // console.log('rows: ' + rows)
       if (rowIndex === rows) {
         // Last tile
         checkcluster = true
       } else {
         // Check the type of the next tile
+        // if (level.tiles[x][y].type === level.tiles[x][y + 1].type &&
+        //             level.tiles[x][y].type !== 0 - 1) {
 
         const vuewel = level[(((cols + 1) * rowIndex)) + colIndex]
         const nextVuewel = level[(((cols + 1) * (rowIndex + 1))) + colIndex]
+
+        // console.log('Checking colIndex * cols : ' + ((rowIndex * ((colIndex * cols)))))
+        // console.log('Vertical test jewel: ' + JSON.stringify(vuewel))
+        // console.log('Vertical compare to next jewel: ' + JSON.stringify(level[((colIndex + (colIndex * cols + rowIndex)))]))
 
         /*
          actual number of cols (7) * rowIndex + colIndex
@@ -249,9 +197,14 @@ function findClusters(state) {
         // 1, 8, 15, 22...
 
         if ((vuewel.color) === (nextVuewel.color)) {
+          // if (level[(((cols + 1) * rowIndex)) + colIndex].color === level[(((cols + 1) * (rowIndex + 1))) + colIndex].color) {
+          // if (level[colIndex * (rowIndex + 1)].color === level[(colIndex + 1) * rowIndex].color &&
+          //            level[(colIndex + 1) + rowIndex].color !== -1) {
+
+          // if (level[jewelCounter].color === level[jewelCounter + 1].color) {
           // Same type as the previous tile, increase matchlength
           matchlength += 1
-          console.log('Vertical matchlength: ' + matchlength)
+          // console.log('Vertical matchlength: ' + matchlength)
         } else {
           // Different type
           checkcluster = true
@@ -262,15 +215,30 @@ function findClusters(state) {
       if (checkcluster) {
         if (matchlength >= 3) {
           // Found a vertical cluster
+          // vuewel.selected = true
 
-          // const selectedVuewelStartRow = (rowIndex + 1) - matchlength
+          const selectedVuewelStartRow = (rowIndex + 1) - matchlength
+
+          // const firstVueweRowPos = (rowIndex + 1) - matchlength
+          // const lastVuewelPos = (rowIndex * colIndex)
+
+          // const rowEndPos = rowIndex + 1
+
+          // console.log('Vertical lastVuewelPos: ' + lastVuewelPos)
+          // level[lastVuewelPos].selected = true
+
+          //  for (let matchedVuewel = rowEndPos; matchedVuewel < matchlength + 1; matchedVuewel--) {
+          // level[matchedVuewel].selected = true
+          // }
 
           const pos = ((rowIndex * (cols + 1)) + (colIndex))
           console.log('Vertical lastVuewelPos: ' + pos)
 
-          for (let matchedVuewelPos = pos;
-            matchedVuewelPos >= (pos - ((matchlength - 1) * 7));
-            (matchedVuewelPos -= 7)) {
+          for (let matchedVuewelPos = pos; matchedVuewelPos >= (pos - ((matchlength - 1) * 7)); (matchedVuewelPos -= 7)) {
+            // console.log('matchedVuewelPos: ' + matchedVuewelPos)
+            // console.log('test > cond check: ' + (pos - (matchlength * 7)))
+            // console.log('test matchedVuewelPos: ' + matchedVuewelPos)
+
             if (matchedVuewelPos < 0 || matchedVuewelPos > level.length) {
               console.log('Somethings wrong! : ' + matchedVuewelPos)
               return
@@ -280,19 +248,17 @@ function findClusters(state) {
 
           clusters.push({
             column: colIndex,
-            row: (rowIndex + 1) - matchlength,
+            row: selectedVuewelStartRow,
             length: matchlength,
             horizontal: false
           })
         }
-
         matchlength = 1
       }
     }
   }
-
   console.log('findClusters - found clusters: ' + JSON.stringify(clusters))
-  // state.vuewels = level
+  state.vuewels = level
   return level
 }
 
@@ -330,10 +296,6 @@ const store = createStore({
       state.vuewels = vuewels
       findClusters(state)
     },
-    findAndRemove(state) {
-      console.log('findAndRemove')
-      findAndRemoveClusters(state)
-    },
     startTouch(state, { row, column }) {
       // console.log('startTouch...vuewels: ' + state.vuewels.length)
       // eslint-disable-next-line no-return-assign
@@ -346,7 +308,7 @@ const store = createStore({
 
       console.log('vuewel: ' + JSON.stringify(vuewel))
 
-      // Reset (empty) the array of selected Vewels
+      // Reset (empty) the array of selecetd Vewels
       selectedVewels = []
 
       if (vuewel) {
@@ -436,11 +398,31 @@ const store = createStore({
 
       // https://rembound.com/articles/how-to-make-a-match3-game-with-html5-canvas
 
-      findAndRemoveClusters(state)
       findClusters(state)
 
+      console.log(state.vuewels)
+
+      // const i = 1
+      // if (i === 1) return
+
+      // const someArray = [2, 2, 2, 5, 5, 5, 3, 3, 3, 3, 9, 9];
       /*
-      findClusters(state)
+      console.log(aggregate(state.vuewels))
+
+      function aggregate(arr) {
+        return arr
+        // retrieve unique values
+          .reduce((acc, val) => (!acc.includes(val) && acc.concat(val)) || acc, [])
+        // use unique values to map arr values to strings
+        // if number of matches >= 3
+          .map(val => {
+            const filtered = arr.filter(v => v === val)
+            return filtered.length > 2 ? filtered.join('') : false
+          })
+        // filter non falsy values
+          .filter(val => val)
+      }
+      */
 
       // Tabulate scores
       let scoreAdd = 0
@@ -496,9 +478,7 @@ const store = createStore({
       // console.log('  state.vuewels length: ' + state.vuewels.length)
 
       // findClusters(state)
-      */
     },
-
   },
   actions: {
   },
